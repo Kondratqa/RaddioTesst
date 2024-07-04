@@ -1,7 +1,7 @@
 package ru.netology.test;
 
 import org.junit.jupiter.api.Test;
-import ru.ntology.Radio;
+import ru.netology.Radio;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,6 +26,11 @@ public class RadioTest {
         assertEquals(0, radio.getCurrentStation());
     }
 
+    @Test
+    public void testSetMaxStation() {
+        Radio radio = new Radio(10);
+        assertEquals(0, radio.getCurrentStation());
+    }
     @Test
     public void testNext() {
         Radio radio = new Radio();
@@ -61,7 +66,6 @@ public class RadioTest {
         Radio radio = new Radio();
         assertEquals(50, radio.getVolume());
     }
-
     @Test
     public void testIncreaseVolume() {
         Radio radio = new Radio();
@@ -69,6 +73,15 @@ public class RadioTest {
         assertEquals(51, radio.getVolume());
     }
 
+    @Test
+    public void testIncreaseVolumeBeyondMax() {
+        Radio radio = new Radio();
+        for (int i = 0; i < 50; i++) {
+            radio.increaseVolume();
+        }
+        radio.increaseVolume();
+        assertEquals(100, radio.getVolume());
+    }
     @Test
     public void testDecreaseVolume() {
         Radio radio = new Radio();
@@ -92,13 +105,4 @@ public class RadioTest {
         assertEquals(0, radio.getCurrentStation());
     }
 
-    @Test
-    public void testIncreaseVolumeBeyondMax() {
-        Radio radio = new Radio();
-        for (int i = 0; i < 50; i++) {
-            radio.increaseVolume();
-        }
-        radio.increaseVolume();
-        assertEquals(100, radio.getVolume());
-    }
 }
